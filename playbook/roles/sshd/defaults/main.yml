@@ -1,0 +1,8 @@
+---
+# defaults file for sshd_config
+sshd_password_authentication: "no" 
+sshd_permit_root_login: "no" 
+sshd_pubkey_authentication: "yes" 
+sshd_use_pam: "no"
+...
+

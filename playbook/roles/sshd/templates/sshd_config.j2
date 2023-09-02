@@ -1,0 +1,19 @@
+# {{ ansible_managed }} 
+
+PubkeyAuthentication {{ sshd_pubkey_authentication | default('yes') }}
+
+PasswordAuthentication {{ sshd_password_authentication | default('no') }}
+UsePAM {{ sshd_use_pam | default('no') }}
+
+PermitRootLogin {{ sshd_permit_root_login | default('no') }}
+
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+UseDNS no
+GSSAPIAuthentication no
+
+##########

@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cloudruspace
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudruapp-deployment
+  namespace: cloudruspace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cloudruapp
+  template:
+    metadata:
+      labels:
+        app: cloudruapp
+    spec:
+      containers:
+      - name: cloudruapp
+        image: egrqdockerhub/cloudruapp:1.0.0
+        env:
+        - name: AUTHOR
+          value: "egrq.devops@gmail.com"
+        - name: UUID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /id
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /id
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudruapp-service
+  namespace: cloudruspace
+spec:
+  selector:
+    app: cloudruapp
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: ClusterIP

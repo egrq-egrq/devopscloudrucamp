@@ -1,0 +1,15 @@
+###########
+# CLOUDRU #
+###########
+---
+- name: "cloudru playbook"
+  hosts: cloudru
+  become: true
+
+  vars_files: vault/vars.yml
+
+  roles:
+    - user
+    - authorize
+    - sshd
+...

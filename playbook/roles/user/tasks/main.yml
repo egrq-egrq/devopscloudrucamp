@@ -1,0 +1,9 @@
+---
+- name: "Creating and configuring a host user"
+  ansible.builtin.user:
+    name: "{{ cloudru_host_user }}"
+    password: "{{ cloudru_host_user_pass | password_hash('sha512') }}"
+    state: present
+    shell: /bin/bash
+    create_home: yes
+...

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "chart.name" . }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+        - name: AUTHOR
+          value: "{{ .Values.author }}"
+        - name: UUID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        readinessProbe:
+          httpGet:
+            path: /id
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /id
+            port: {{ .Values.service.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10

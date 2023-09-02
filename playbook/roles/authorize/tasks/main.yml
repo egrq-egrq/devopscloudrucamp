@@ -1,0 +1,16 @@
+---
+- name: "Ensure ssh directory exists"
+  ansible.builtin.file:
+    path: "/home/{{ cloudru_host_user }}/.ssh"
+    state: directory
+    mode: "0600"
+    owner: "{{ cloudru_host_user }}"
+    group: "{{ cloudru_host_user }}"
+
+- name: "Copy ssh public key to authorized_keys"
+  ansible.posix.authorized_key:
+    user: "{{ cloudru_host_user }}"
+    key: "{{ lookup('file', cloudru_ssh_pubkey_path) }}"
+    path: "/home/{{ cloudru_host_user }}/.ssh/authorized_keys"
+    state: present
+...

@@ -1,0 +1,5 @@
+---
+cloudru_host_user: "cloudru"
+cloudru_host_user_pass: "cloudpass"
+cloudru_ssh_pubkey_path: "/home/vagrant/ansible/files/authorized_key.pub"
+...
