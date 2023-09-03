@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-CLOUDRU_INVENTORY_FILE_PATH="./hosts.ini"
-CLOUDRU_PLAYBOOK_PATH="./playbook.yml"
+CLOUDRU_INVENTORY_FILE_PATH="./playbook/hosts.ini"
+CLOUDRU_PLAYBOOK_PATH="./playbook/playbook.yml"
 
 CLOUDRU_PLAYBOOK_FORKS=""
 CLOUDRU_PLAYBOOK_TAGS=""
