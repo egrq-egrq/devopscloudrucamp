@@ -5,7 +5,13 @@ ansible-galaxy collection install -r ./playbook/requirements.yml
 ~~~
 
 ###  Укажите Ваш ansible_host
-  - Инвентарь `./playbook/hosts.ini`
+  - inventory `./playbook/hosts.ini`
+
+### Укажите Ваш become_user
+  - ansible.cfg `./playbook/ansible.cfg`
+
+### Укажите Ваш private_key_file
+  - ansible.cfg `./playbook/ansible.cfg`
 
 ### Запуск плейбука
 ```
